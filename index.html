@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Lofi By Sam</title>
+    <link rel="stylesheet" type="text/css" href="static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+</head>
+<body>
+    <video class="video-background" autoplay muted loop>
+        <source src="static/video/chalet.mp4" type="video/mp4">
+    </video>
+    <div id="time"></div>
+
+    <div class="control-bar">
+        <button class="control-button" id="music-button"><i class="fas fa-music"></i></button>
+        <button class="control-button" id="control-image"><i class="fas fa-image"></i></button>
+        <button class="control-button" id="prev-button"><i class="fas fa-backward"></i></button>
+        <button class="control-button" id="play-pause-button"><i class="fas fa-play"></i></button>
+        <button class="control-button" id="next-button"><i class="fas fa-forward"></i></button>
+        <button class="control-button" id="timer-button"><i class="fas fa-clock"></i></button>
+        <button class="control-button" id="volume-button"><i class="fas fa-volume-up"></i></button>
+        <input type="range" id="volume-control" min="0" max="100"  value="50">
+    </div>
+    <div class="iframe-container" id="music-container">
+        <iframe id="soundcloud-player" width="100%" height="100%" allow="autoplay"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
+        </iframe>
+    </div>
+
+    <div id="video-wallpapers" style="display: none;">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/chalet.mp4" src="static/image/chalet.jpg" alt="Maison">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/houses.mp4" src="static/image/houses.jpg" alt="chalet">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/sunset.mp4" src="static/image/sunset.jpg" alt="sunset">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/chat.mp4" src="static/image/chat.jpg" alt="chat">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/city.mp4" src="static/image/city.jpg" alt="City">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/fille.mp4" src="static/image/fille.jpg" alt="fille qui révise">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/dune.mp4" src="static/image/dune.jpg" alt="Dune">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/camping.mp4" src="static/image/camping.jpg" alt="camping">
+        <img class="wallpaper-thumbnail" data-video-src="static/video/alien.mp4" src="static/image/alien.jpg" alt="alien dans l'espace">
+    </div>
+
+    <div id="timer-controls">
+        <button class="timer-button" data-time="300">5 min</button>
+        <button class="timer-button" data-time="600">10 min</button>
+        <button class="timer-button" data-time="1500">25 min</button>
+        <button class="timer-button" data-time="1800">30 min</button>
+    </div>
+
+    <div id="running-timer" style="display: none;">
+        <p>              <span id="time-remaining">00:00</span></p>
+        <button id="stop-button">Stop</button>
+        <button id="add-time-button">+5 min</button>
+        <button id="subtract-time-button">-5 min</button>
+    </div>
+
+   <a href="https://samuelvanderhoeven.fr" ><button id="follow-button">follow me</button></a>
+    <script src="static/script.js"></script>
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+
+</body>
+</html>
