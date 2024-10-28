@@ -1,0 +1,243 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+    scroll-behavior: smooth;
+    scroll-padding-top: 3rem;
+}
+:root{
+    --main-color: #ff9f0d;
+    --texte-color: #fff;
+    --autre-color: #5bb2cf;
+    --fond-color: rgba(0, 0, 0, 0.7);
+
+    --big-police: 4.5rem;
+    --h2-police:2.6rem;
+    --p-police:1.1rem;
+}
+.video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: -1; /* Vidéo derrière le contenu */
+}
+
+/* Style de la barre de contrôle */
+.control-bar {
+    position: fixed;
+    bottom: 2%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--fond-color);
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 500px;
+}
+
+/* Style des boutons de la barre de contrôle */
+.control-button {
+    background: none;
+    border: none;
+    color: var(--texte-color);
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    outline: none;
+}
+
+/* Style pour les icônes */
+.control-button i {
+    font-size: 24px;
+}
+
+/* Effet de hover sur les boutons */
+.control-button:hover {
+    color: var(--autre-color); /* Or pour un effet de survol */
+}
+
+.iframe-container {
+    width: 300px;  /* Ajuste la taille selon le carré gris */
+    height: 225px; /* Idem pour la hauteur */
+    border-radius: 20px; /* Bordures arrondies comme le carré gris */
+    overflow: hidden; /* Masquer tout débordement pour garder la forme arrondie */
+    position: absolute; /* Permet de positionner le carré où tu veux */
+    bottom: 2%; /* Positionnement centré par rapport à l'image */
+    left: 50%;
+    transform: translate(-50%, -40%); /* Centrage par rapport à la page */
+    display: none;
+}
+
+/* Style pour l'iframe */
+.iframe-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none; /* Enlève les bordures de l'iframe */
+}
+
+#time {
+    position: absolute;
+    bottom: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 650%;
+    font-family: 'Roboto', sans-serif;
+    color: var(--texte-color);
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+}
+
+#time:hover {
+    color: var(--autre-color); /* Or pour un effet de survol */
+
+}
+
+
+input[type="range"] {
+    width: 100%;
+    display: none;
+}
+
+#video-wallpapers {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start; /* Aligner les éléments en haut */
+    background-color: rgba(255, 255, 255, 0.75); /* Fond semi-transparent */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    z-index: 12; /* Pour être au-dessus de la vidéo */
+    max-height: calc(30vh + 3rem); /* 30vh correspond à 3 lignes de wallpapers + padding */
+    overflow-y: auto; /* Scroll vertical si trop de contenu */
+    width: 80vw; /* Limiter la largeur en fonction de l'écran */
+    max-width: 80vw;
+}
+
+.wallpaper-thumbnail {
+    width: calc(25vw - 2rem); /* Miniatures responsive (s'adaptent à la largeur de l'écran) */
+    height: auto; /* Conserver le ratio */
+    margin: 1rem; /* Espacement entre les miniatures */
+    cursor: pointer;
+    border: 0.2rem solid transparent;
+    border-radius: 3%;
+    transition: border-color 0.3s ease;
+}
+
+.wallpaper-thumbnail:hover {
+    border-color: var(--autre-color); /* Bordure au survol */
+}
+
+@media (max-width: 768px) {
+    #video-wallpapers {
+        max-height: calc(45vh + 2rem); /* Augmenter la hauteur en fonction des écrans plus petits */
+        padding: 1rem; /* Réduire les marges sur petits écrans */
+    }
+
+    .wallpaper-thumbnail {
+        width: calc(33vw - 1rem); /* Ajuster la taille des miniatures pour petits écrans */
+        margin: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #video-wallpapers {
+        max-height: calc(50vh + 2rem); /* Ajuster pour les très petits écrans */
+    }
+
+    .wallpaper-thumbnail {
+        width: calc(50vw - 1rem); /* Plus grandes miniatures sur petits écrans */
+    }
+}
+
+/* Styles pour le minuteur */
+#timer-controls, #running-timer {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--fond-color);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    z-index: 10; /* Pour être au-dessus de la vidéo */
+}
+
+
+#running-timer p {
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    color: var(--texte-color);
+    margin-bottom: 1rem;
+}
+
+/* Style du temps restant */
+#time-remaining {
+    font-size: var(--big-police); /* Utiliser la taille de police définie dans :root */
+    color: var(--texte-color); /* Couleur du texte définie dans :root */
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
+    margin-bottom: 10px;
+}
+
+/* Styles pour les boutons dans le minuteur */
+#running-timer button, #timer-controls button {
+    background-color: var(--main-color); /* Utiliser une couleur de fond de votre palette */
+    color: var(--texte-color); /* Couleur du texte définie dans :root */
+    padding: 10px 15px; /* Marges internes pour le padding */
+    margin: 5px; /* Espacement entre les boutons */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Pointeur pour le curseur */
+    transition: background-color 0.3s; /* Transition pour le changement de couleur */
+    font-size: 1.2rem; /* Augmenter la taille de la police */
+}
+
+/* Effet de hover sur les boutons */
+#running-timer button:hover, #timer-controls button:hover {
+    background-color: var(--autre-color); /* Changer la couleur au survol */
+}
+
+/* Affichage du minuteur quand il est actif */
+#running-timer {
+    display: block; /* Afficher le minuteur */
+}
+
+
+#follow-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--main-color); /* Utiliser une couleur de fond de votre palette */
+    color: var(--texte-color); /* Couleur du texte définie dans :root */
+    padding: 10px 15px; /* Marges internes pour le padding */
+    margin: 5px; /* Espacement entre les boutons */
+    border: none; /* Pas de bordure */
+    border-radius: 5px; /* Coins arrondis */
+    cursor: pointer; /* Pointeur pour le curseur */
+    transition: background-color 0.3s; /* Transition pour le changement de couleur */
+    font-size: 1.2rem; /* Augmenter la taille de la police */
+}
+
+#follow-button:hover {
+    background-color: var(--autre-color); /* Changer la couleur au survol */
+}
