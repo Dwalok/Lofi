@@ -1,4 +1,4 @@
-# Lofi
+# Lofi 🎧
 
 Site Web permettant de lancer de la musique lofi tout en ayant une jolie vidéo qui tourne comme fond d'écran et la possibilité d'utiliser un minuteur.
 Vous pouvez l'utiliser directement sur https://lofi.samuelvanderhoeven.fr
@@ -13,7 +13,7 @@ You can use it directly on https://lofi.samuelvanderhoeven.fr
 
 <br>
 
-## Future mise à jour:
+## ⚙️ Future mise à jour:
 
 - possibilité d'ajouter des bruit ambhian (Feu de cheminé, pluie, bruit blanc ...)
 - Amélioration du responsive
@@ -21,7 +21,7 @@ You can use it directly on https://lofi.samuelvanderhoeven.fr
 
 <br>
 
-## Site Web:
+## 📺 Site Web:
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://github.com/Dwalok/Lofi/blob/47825f174704b41299b57e065fa765a762ed26f4/static/image/alien.jpg">
