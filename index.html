@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lofi Studio by Sam</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="static/video/Lofi-Van-Life-Moewalls-Com2.mp4" type="video/mp4">
+    </video>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <header class="top-bar">
+        <div class="brand">
+            <span class="brand-title">Lofi Studio</span>
+            <span class="brand-subtitle">Focus, ambience, notes</span>
+        </div>
+        <div class="top-actions">
+            <div id="time" class="time"></div>
+            <a class="follow-link" href="https://samuelvanderhoeven.fr">follow me</a>
+        </div>
+    </header>
+
+    <main class="stage">
+        <section class="panel" id="music-panel" data-panel>
+            <div class="panel-header">
+                <h2>Playlists</h2>
+                <p>Pick a lofi mood, then press play.</p>
+            </div>
+            <div class="panel-body">
+                <label class="field">
+                    <span>Choose a playlist</span>
+                    <select id="playlist-select">
+                        <option value="https://api.soundcloud.com/playlists/1746424434">Chill - Lofi</option>
+                        <option value="https://soundcloud.com/lofi_girl/sets/jazz-lofis">Lofi Girl - Jazz Lofi</option>
+                        <option value="https://soundcloud.com/user-636346752/sets/lofi-chill">Chill - Lofi</option>
+                        <option value="https://soundcloud.com/lofi_girl/sets/sleep-lofi">Lofi Girl - Sleep Lofi</option>
+                        <option value="https://soundcloud.com/dzcnczlv19sy/sets/lofi-hip-hop">Hip Hop - Lofi</option>
+                    </select>
+                </label>
+                <div class="field-inline">
+                    <input type="text" id="custom-playlist-url" placeholder="Paste a SoundCloud playlist link">
+                    <button type="button" id="custom-playlist-button">Load</button>
+                </div>
+                <div class="player-card">
+                    <iframe
+                        id="soundcloud-player"
+                        title="SoundCloud player"
+                        allow="autoplay"
+                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23f2a23c&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true">
+                    </iframe>
+                </div>
+                <div class="slider-row">
+                    <div class="slider-label">Music volume</div>
+                    <input type="range" id="volume-control" data-volume-for="music" min="0" max="100" value="80">
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="ambience-panel" data-panel>
+            <div class="panel-header">
+                <h2>Ambient Lab</h2>
+                <p>Layer calm noises with independent volume.</p>
+            </div>
+            <div class="panel-body">
+                <div class="ambient-item" data-sound="rain">
+                    <button class="ambient-toggle" type="button" aria-label="Toggle rain">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="ambient-meta">
+                        <div class="ambient-name">Rain on window</div>
+                        <div class="ambient-desc">Soft, steady patter</div>
+                    </div>
+                    <input class="ambient-volume" data-volume-for="rain" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="ambient-item" data-sound="fireplace">
+                    <button class="ambient-toggle" type="button" aria-label="Toggle fireplace">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="ambient-meta">
+                        <div class="ambient-name">Fireplace</div>
+                        <div class="ambient-desc">Warm crackle</div>
+                    </div>
+                    <input class="ambient-volume" data-volume-for="fireplace" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="ambient-item" data-sound="wind">
+                    <button class="ambient-toggle" type="button" aria-label="Toggle wind">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="ambient-meta">
+                        <div class="ambient-name">Night wind</div>
+                        <div class="ambient-desc">Low, airy sweep</div>
+                    </div>
+                    <input class="ambient-volume" data-volume-for="wind" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="ambient-item" data-sound="waves">
+                    <button class="ambient-toggle" type="button" aria-label="Toggle waves">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="ambient-meta">
+                        <div class="ambient-name">Ocean waves</div>
+                        <div class="ambient-desc">Slow tide</div>
+                    </div>
+                    <input class="ambient-volume" data-volume-for="waves" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="ambient-item" data-sound="cafe">
+                    <button class="ambient-toggle" type="button" aria-label="Toggle cafe">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <div class="ambient-meta">
+                        <div class="ambient-name">Cafe murmurs</div>
+                        <div class="ambient-desc">Soft crowd</div>
+                    </div>
+                    <input class="ambient-volume" data-volume-for="cafe" type="range" min="0" max="100" value="0">
+                </div>
+                <div class="ambient-actions">
+                    <button type="button" class="ghost" id="mute-all-ambient">Mute all</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="volume-panel" data-panel>
+            <div class="panel-header">
+                <h2>Volumes</h2>
+                <p>Adjust every level in one spot.</p>
+            </div>
+            <div class="panel-body">
+                <div class="volume-stack">
+                    <div class="slider-row">
+                        <div class="slider-label">Music</div>
+                        <input type="range" id="volume-control-panel" data-volume-for="music" min="0" max="100" value="80">
+                    </div>
+                    <div class="slider-row">
+                        <div class="slider-label">Rain</div>
+                        <input type="range" data-volume-for="rain" min="0" max="100" value="0">
+                    </div>
+                    <div class="slider-row">
+                        <div class="slider-label">Fireplace</div>
+                        <input type="range" data-volume-for="fireplace" min="0" max="100" value="0">
+                    </div>
+                    <div class="slider-row">
+                        <div class="slider-label">Wind</div>
+                        <input type="range" data-volume-for="wind" min="0" max="100" value="0">
+                    </div>
+                    <div class="slider-row">
+                        <div class="slider-label">Waves</div>
+                        <input type="range" data-volume-for="waves" min="0" max="100" value="0">
+                    </div>
+                    <div class="slider-row">
+                        <div class="slider-label">Cafe</div>
+                        <input type="range" data-volume-for="cafe" min="0" max="100" value="0">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="notes-panel" data-panel>
+            <div class="panel-header">
+                <h2>Notes</h2>
+                <p>Post-it board for quick thoughts.</p>
+            </div>
+            <div class="notes-toolbar">
+                <button type="button" id="add-note">New note</button>
+                <button type="button" id="clear-notes" class="ghost">Clear</button>
+            </div>
+            <div id="notes-board"></div>
+        </section>
+
+        <section class="panel" id="timer-panel" data-panel>
+            <div class="panel-header">
+                <h2>Focus Timer</h2>
+                <p>Quick sessions or custom minutes.</p>
+            </div>
+            <div class="panel-body">
+                <div id="timer-controls" class="timer-grid">
+                    <button class="timer-button" data-time="300">5 min</button>
+                    <button class="timer-button" data-time="600">10 min</button>
+                    <button class="timer-button" data-time="1500">25 min</button>
+                    <button class="timer-button" data-time="1800">30 min</button>
+                    <div class="timer-custom">
+                        <input type="number" id="custom-timer-input" min="1" max="120" placeholder="Minutes">
+                        <button type="button" id="custom-timer-start">Start</button>
+                    </div>
+                </div>
+                <div id="running-timer" class="timer-running" hidden>
+                    <div id="time-remaining" class="timer-display">00:00</div>
+                    <div class="timer-actions">
+                        <button type="button" id="stop-button">Stop</button>
+                        <button type="button" id="add-time-button">+5 min</button>
+                        <button type="button" id="subtract-time-button">-5 min</button>
+                    </div>
+                    <div id="timer-status" class="timer-status"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="wallpaper-panel" data-panel>
+            <div class="panel-header">
+                <h2>Wallpapers</h2>
+                <p>Swap the video mood.</p>
+            </div>
+            <div class="panel-body wallpaper-grid">
+                <button class="wallpaper-thumb" data-video-src="static/video/Alien.mp4" type="button">
+                    <img src="static/image/Alien-001.jpg" alt="Alien space">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Chalet.mp4" type="button">
+                    <img src="static/image/Chalet-001.jpg" alt="Chalet">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Chill-Mario-Pixel-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Chill-Mario-Pixel-Moewalls-Com-001.jpg" alt="Mario pixel">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/City.mp4" type="button">
+                    <img src="static/image/City-001.jpg" alt="City">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Fille.mp4" type="button">
+                    <img src="static/image/Fille-001.jpg" alt="Student girl">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Garden-House-Lofi-Rainy-Day-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Garden-House-Lofi-Rainy-Day-Moewalls-Com-001.jpg" alt="Rainy garden house">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Hornet-Green-Cave-Hollow-Knight-Silksong-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Hornet-Green-Cave-Hollow-Knight-Silksong-Moewalls-Com-001.jpg" alt="Hornet hollow knight">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Houses.mp4" type="button">
+                    <img src="static/image/Houses-001.jpg" alt="Houses">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Jake-Listening-To-Music-In-The-Rain-Adventure-Time-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Jake-Listening-To-Music-In-The-Rain-Adventure-Time-Moewalls-Com-001.jpg" alt="Jake adventure time">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Boy-Camping-Car-Raining-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Lofi-Boy-Camping-Car-Raining-Moewalls-Com-001.jpg" alt="Lofi boy camping">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Girl-Autumn-Afternoon-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Lofi-Girl-Autumn-Afternoon-Moewalls-Com-001.jpg" alt="Lofi girl autumn">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-House-Cloudy-Day-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Lofi-House-Cloudy-Day-Moewalls-Com-001.jpg" alt="Cloudy lofi house">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Van-Life-Moewalls-Com2.mp4" type="button">
+                    <img src="static/image/Lofi-Van-Life-Moewalls-Com2-001.jpg" alt="Van life lofi">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Lonely-Lofi-Boy-Aesthetic-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Lonely-Lofi-Boy-Aesthetic-Moewalls-Com-001.jpg" alt="Lonely lofi boy">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Night-Drive-Galaxy-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Night-Drive-Galaxy-Moewalls-Com-001.jpg" alt="Night drive galaxy">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Pirate-Ship-Golden-Field-Minecraft-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Pirate-Ship-Golden-Field-Minecraft-Moewalls-Com-001.jpg" alt="Minecraft pirate ship">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Pixel-Girl-Smoking-Night-City-Cyberpunk-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Pixel-Girl-Smoking-Night-City-Cyberpunk-Moewalls-Com-001.jpg" alt="Pixel girl cyberpunk">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Star-Wars-Ghibli-Style-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Star-Wars-Ghibli-Style-Moewalls-Com-001.jpg" alt="Star wars ghibli style">
+                </button>
+                <button class="wallpaper-thumb" data-video-src="static/video/Winter-Bus-Pixel-Moewalls-Com.mp4" type="button">
+                    <img src="static/image/Winter-Bus-Pixel-Moewalls-Com-001.jpg" alt="Winter pixel bus">
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <div class="dock">
+        <div class="dock-group">
+            <button class="dock-button" data-target="music-panel" title="Playlists">
+                <i class="fas fa-music"></i>
+            </button>
+            <button class="dock-button" data-target="ambience-panel" title="Ambience">
+                <i class="fas fa-cloud-rain"></i>
+            </button>
+            <button class="dock-button" data-target="notes-panel" title="Notes">
+                <i class="far fa-sticky-note"></i>
+            </button>
+            <button class="dock-button" data-target="wallpaper-panel" title="Wallpapers">
+                <i class="fas fa-image"></i>
+            </button>
+            <button class="dock-button" data-target="timer-panel" title="Timer">
+                <i class="fas fa-clock"></i>
+            </button>
+        </div>
+        <div class="dock-divider"></div>
+        <div class="dock-group">
+            <button class="dock-button" id="prev-button" title="Previous">
+                <i class="fas fa-backward"></i>
+            </button>
+            <button class="dock-button dock-play" id="play-pause-button" title="Play or pause">
+                <i class="fas fa-play"></i>
+            </button>
+            <button class="dock-button" id="next-button" title="Next">
+                <i class="fas fa-forward"></i>
+            </button>
+            <button class="dock-button" data-target="volume-panel" title="Volumes">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+        </div>
+    </div>
+
+    <audio id="ambient-rain" src="https://www.soundjay.com/nature/rain-01.mp3" preload="none" loop></audio>
+    <audio id="ambient-fireplace" src="https://www.soundjay.com/nature/fireplace-1.mp3" preload="none" loop></audio>
+    <audio id="ambient-wind" src="https://www.soundjay.com/nature/wind-1.mp3" preload="none" loop></audio>
+    <audio id="ambient-waves" src="https://www.soundjay.com/nature/ocean-wave-1.mp3" preload="none" loop></audio>
+    <audio id="ambient-cafe" src="https://www.soundjay.com/misc/sounds/coffee-shop-1.mp3" preload="none" loop></audio>
+
+    <script src="https://w.soundcloud.com/player/api.js"></script>
+    <script src="static/script.js"></script>
+</body>
+</html>
