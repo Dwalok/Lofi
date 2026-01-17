@@ -8,7 +8,7 @@
     --bg-1: #0b0d10;
     --bg-2: #1a1f24;
     --accent: #f2a23c;
-    --accent-2: #3fb8a5;
+    --accent-2: #3C8BF2;
     --text: #f7f2e8;
     --text-muted: #c8bda9;
     --panel: rgba(12, 15, 18, 0.68);
@@ -276,7 +276,6 @@ input[type="range"]::-moz-range-track {
     color: #1b140b;
     border: none;
     border-radius: 12px;
-    padding: 10px 14px;
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -285,7 +284,8 @@ input[type="range"]::-moz-range-track {
 .panel button:hover {
     transform: translateY(-1px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-    background: #f5b158;
+    padding: 10px 14px;
+    background: var(--accent);
 }
 
 .panel button.ghost {
