@@ -1,313 +1,303 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lofi Studio by Sam</title>
-    <link rel="stylesheet" href="static/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Lofi Studio</title>
+    <meta name="description" content="Lofi Studio: lofi playlists, ambient mixer, focus timer, tasks and notes over living wallpapers.">
+    <meta name="theme-color" content="#0b0c10">
+    <meta name="color-scheme" content="dark">
+    <meta property="og:title" content="Lofi Studio">
+    <meta property="og:description" content="Lofi playlists, ambient mixer, focus timer and notes in one calm space.">
+    <meta property="og:image" content="static/image/Lofi-Van-Life-Moewalls-Com2-001.jpg">
     <link rel="icon" type="image/svg+xml" href="static/favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="manifest" href="manifest.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Unbounded:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://w.soundcloud.com">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-    <video class="video-background" autoplay muted loop playsinline>
-        <source src="static/video/Lofi-Van-Life-Moewalls-Com2.mp4" type="video/mp4">
-    </video>
-    <div class="atmosphere" aria-hidden="true"></div>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor" stroke="none"/></symbol>
+            <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1.2" fill="currentColor" stroke="none"/><rect x="14" y="4" width="4" height="16" rx="1.2" fill="currentColor" stroke="none"/></symbol>
+            <symbol id="i-prev" viewBox="0 0 24 24"><path d="M19 20 9 12l10-8v16z" fill="currentColor" stroke="none"/><path d="M5 19V5"/></symbol>
+            <symbol id="i-next" viewBox="0 0 24 24"><path d="m5 4 10 8-10 8V4z" fill="currentColor" stroke="none"/><path d="M19 5v14"/></symbol>
+            <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M2 18h1.4a4 4 0 0 0 3.3-1.7l6.6-9.6A4 4 0 0 1 16.6 5H22"/><path d="m18 2 4 3-4 3"/><path d="M2 6h1.9a4 4 0 0 1 3.2 1.6"/><path d="M22 18h-5.5a4 4 0 0 1-3.2-1.6"/><path d="m18 15 4 3-4 3"/></symbol>
+            <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+            <symbol id="i-ambience" viewBox="0 0 24 24"><path d="M2 12h2"/><path d="M6 8v8"/><path d="M10 4v16"/><path d="M14 7v10"/><path d="M18 10v4"/><path d="M22 12h-2"/></symbol>
+            <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M9 2h6"/></symbol>
+            <symbol id="i-notes" viewBox="0 0 24 24"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/><path d="M7 13h6M7 17h8"/></symbol>
+            <symbol id="i-scene" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></symbol>
+            <symbol id="i-zen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+            <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M6 9h.01M10 9h.01M14 9h.01M18 9h.01M6 13h.01M18 13h.01M9 15h6"/></symbol>
+            <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></symbol>
+            <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/><path d="m22 9-6 6M16 9l6 6"/></symbol>
+            <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+            <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+            <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+            <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></symbol>
+            <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+            <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></symbol>
+            <symbol id="i-video" viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></symbol>
+            <symbol id="i-rain" viewBox="0 0 24 24"><path d="M20 15.5A4.5 4.5 0 0 0 17.5 7h-1.3A7 7 0 1 0 4 13.3"/><path d="M8 19v2M8 13v2M16 19v2M16 13v2M12 21v2M12 15v2"/></symbol>
+            <symbol id="i-fire" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3.3.3 1.6 1.3 2.8 2.5 2.8z"/></symbol>
+            <symbol id="i-forest" viewBox="0 0 24 24"><path d="m10 10-3-5-3 5h1.5L3 14h3.5v4h1v-4H11l-2.5-4H10z"/><path d="m21 13-4-8-4 8h2l-2.5 4H16v3h2v-3h3.5L19 13h2z"/></symbol>
+            <symbol id="i-waves" viewBox="0 0 24 24"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></symbol>
+            <symbol id="i-city" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l6-4v18M11 21V9l8 3v9"/><path d="M8 9v.01M8 12v.01M8 15v.01M15 14v.01M15 17v.01"/></symbol>
+            <symbol id="i-noise" viewBox="0 0 24 24"><path d="M2 12c2-6 4-6 6 0s4 6 6 0 4-6 6 0"/><path d="M22 12h0"/></symbol>
+            <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></symbol>
+        </defs>
+    </svg>
 
-    <header class="top-bar">
-        <div class="brand">
-            <span class="brand-title">Lofi Studio</span>
-            <span class="brand-subtitle">Focus, ambience, notes</span>
-        </div>
-        <div class="top-actions">
-            <div id="time" class="time"></div>
-            <a class="follow-link" href="https://samuelvanderhoeven.fr">follow me</a>
+    <div class="backdrop" aria-hidden="true">
+        <div class="backdrop-image" id="backdrop-image"></div>
+        <video class="backdrop-video" id="backdrop-video" muted loop playsinline preload="auto"></video>
+        <div class="backdrop-tint"></div>
+        <div class="backdrop-grain"></div>
+    </div>
+
+    <header class="topbar ui">
+        <a class="brand" href="./" aria-label="Lofi Studio">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-name">lofi<span>.studio</span></span>
+        </a>
+        <div class="topbar-actions">
+            <div class="status-pill" id="status-pill" hidden>
+                <span class="status-dot"></span>
+                <span id="status-text"></span>
+            </div>
+            <button class="icon-button" type="button" data-open="shortcuts" title="Shortcuts (?)" aria-label="Keyboard shortcuts">
+                <svg><use href="#i-keyboard"/></svg>
+            </button>
+            <button class="icon-button" type="button" id="zen-button" title="Zen mode (Z)" aria-label="Zen mode">
+                <svg><use href="#i-zen"/></svg>
+            </button>
+            <a class="follow-link" href="https://samuelvanderhoeven.fr" target="_blank" rel="noopener">by Sam</a>
         </div>
     </header>
 
-    <main class="stage">
-        <section class="panel" id="music-panel" data-panel>
-            <div class="panel-header">
-                <h2>Playlists</h2>
-                <p>Pick a lofi mood, then press play.</p>
-            </div>
-            <div class="panel-body">
-                <label class="field">
-                    <span>Choose a playlist</span>
-                    <select id="playlist-select">
-                        <option value="https://api.soundcloud.com/playlists/1746424434">Chill - Lofi</option>
-                        <option value="https://soundcloud.com/lofi_girl/sets/jazz-lofis">Lofi Girl - Jazz Lofi</option>
-                        <option value="https://soundcloud.com/user-636346752/sets/lofi-chill">Chill - Lofi</option>
-                        <option value="https://soundcloud.com/lofi_girl/sets/sleep-lofi">Lofi Girl - Sleep Lofi</option>
-                        <option value="https://soundcloud.com/dzcnczlv19sy/sets/lofi-hip-hop">Hip Hop - Lofi</option>
-                    </select>
-                </label>
-                <div class="field-inline">
-                    <input type="text" id="custom-playlist-url" placeholder="Paste a SoundCloud playlist link">
-                    <button type="button" id="custom-playlist-button">Load</button>
-                </div>
-                <div class="player-card">
-                    <iframe
-                        id="soundcloud-player"
-                        title="SoundCloud player"
-                        allow="autoplay"
-                        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1746424434&color=%23f2a23c&auto_play=false&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false&visual=true">
-                    </iframe>
-                </div>
-                <div class="slider-row">
-                    <div class="slider-label">Music volume</div>
-                    <input type="range" id="volume-control" data-volume-for="music" min="0" max="100" value="80">
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="ambience-panel" data-panel>
-            <div class="panel-header">
-                <h2>Ambient Lab</h2>
-                <p>Layer calm noises with independent volume.</p>
-            </div>
-            <div class="panel-body">
-                <div class="ambient-item" data-sound="rain">
-                    <button class="ambient-toggle" type="button" aria-label="Toggle rain">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="ambient-meta">
-                        <div class="ambient-name">Rain on window</div>
-                        <div class="ambient-desc">Soft, steady patter</div>
-                    </div>
-                    <input class="ambient-volume" data-volume-for="rain" type="range" min="0" max="100" value="0">
-                </div>
-                <div class="ambient-item" data-sound="fireplace">
-                    <button class="ambient-toggle" type="button" aria-label="Toggle fireplace">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="ambient-meta">
-                        <div class="ambient-name">Fireplace</div>
-                        <div class="ambient-desc">Warm crackle</div>
-                    </div>
-                    <input class="ambient-volume" data-volume-for="fireplace" type="range" min="0" max="100" value="0">
-                </div>
-                <div class="ambient-item" data-sound="wind">
-                    <button class="ambient-toggle" type="button" aria-label="Toggle wind">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="ambient-meta">
-                        <div class="ambient-name">Jungle</div>
-                        <div class="ambient-desc">bird, jungle</div>
-                    </div>
-                    <input class="ambient-volume" data-volume-for="wind" type="range" min="0" max="100" value="0">
-                </div>
-                <div class="ambient-item" data-sound="waves">
-                    <button class="ambient-toggle" type="button" aria-label="Toggle waves">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="ambient-meta">
-                        <div class="ambient-name">Ocean waves</div>
-                        <div class="ambient-desc">Slow tide</div>
-                    </div>
-                    <input class="ambient-volume" data-volume-for="waves" type="range" min="0" max="100" value="0">
-                </div>
-                <div class="ambient-item" data-sound="cafe">
-                    <button class="ambient-toggle" type="button" aria-label="Toggle cafe">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <div class="ambient-meta">
-                        <div class="ambient-name">Urban Ambiance</div>
-                        <div class="ambient-desc">car, city</div>
-                    </div>
-                    <input class="ambient-volume" data-volume-for="cafe" type="range" min="0" max="100" value="0">
-                </div>
-                <div class="ambient-actions">
-                    <button type="button" class="ghost" id="mute-all-ambient">Mute all</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="volume-panel" data-panel>
-            <div class="panel-header">
-                <h2>Volumes</h2>
-                <p>Adjust every level in one spot.</p>
-            </div>
-            <div class="panel-body">
-                <div class="volume-stack">
-                    <div class="slider-row">
-                        <div class="slider-label">Music</div>
-                        <input type="range" id="volume-control-panel" data-volume-for="music" min="0" max="100" value="80">
-                    </div>
-                    <div class="slider-row">
-                        <div class="slider-label">Rain</div>
-                        <input type="range" data-volume-for="rain" min="0" max="100" value="0">
-                    </div>
-                    <div class="slider-row">
-                        <div class="slider-label">Fireplace</div>
-                        <input type="range" data-volume-for="fireplace" min="0" max="100" value="0">
-                    </div>
-                    <div class="slider-row">
-                        <div class="slider-label">Jungle</div>
-                        <input type="range" data-volume-for="wind" min="0" max="100" value="0">
-                    </div>
-                    <div class="slider-row">
-                        <div class="slider-label">Waves</div>
-                        <input type="range" data-volume-for="waves" min="0" max="100" value="0">
-                    </div>
-                    <div class="slider-row">
-                        <div class="slider-label">city</div>
-                        <input type="range" data-volume-for="cafe" min="0" max="100" value="0">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="notes-panel" data-panel>
-            <div class="panel-header">
-                <h2>Notes</h2>
-                <p>Post-it board for quick thoughts.</p>
-            </div>
-            <div class="notes-toolbar">
-                <button type="button" id="add-note">New note</button>
-                <button type="button" id="clear-notes" class="ghost">Clear</button>
-            </div>
-            <div id="notes-board"></div>
-        </section>
-
-        <section class="panel" id="timer-panel" data-panel>
-            <div class="panel-header">
-                <h2>Focus Timer</h2>
-                <p>Quick sessions or custom minutes.</p>
-            </div>
-            <div class="panel-body">
-                <div id="timer-controls" class="timer-grid">
-                    <button class="timer-button" data-time="300">5 min</button>
-                    <button class="timer-button" data-time="600">10 min</button>
-                    <button class="timer-button" data-time="1500">25 min</button>
-                    <button class="timer-button" data-time="1800">30 min</button>
-                    <div class="timer-custom">
-                        <input type="number" id="custom-timer-input" min="1" max="120" placeholder="Minutes">
-                        <button type="button" id="custom-timer-start">Start</button>
-                    </div>
-                </div>
-                <div id="running-timer" class="timer-running" hidden>
-                    <div id="time-remaining" class="timer-display">00:00</div>
-                    <div class="timer-actions">
-                        <button type="button" id="stop-button">Stop</button>
-                        <button type="button" id="add-time-button">+5 min</button>
-                        <button type="button" id="subtract-time-button">-5 min</button>
-                    </div>
-                    <div id="timer-status" class="timer-status"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="panel" id="wallpaper-panel" data-panel>
-            <div class="panel-header">
-                <h2>Wallpapers</h2>
-                <p>Swap the video mood.</p>
-            </div>
-            <div class="panel-body wallpaper-grid">
-                <button class="wallpaper-thumb" data-video-src="static/video/Alien.mp4" type="button">
-                    <img src="static/image/Alien-001.jpg" alt="Alien space">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Chalet.mp4" type="button">
-                    <img src="static/image/Chalet-001.jpg" alt="Chalet">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Chill-Mario-Pixel-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Chill-Mario-Pixel-Moewalls-Com-001.jpg" alt="Mario pixel">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/City.mp4" type="button">
-                    <img src="static/image/City-001.jpg" alt="City">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Fille.mp4" type="button">
-                    <img src="static/image/Fille-001.jpg" alt="Student girl">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Garden-House-Lofi-Rainy-Day-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Garden-House-Lofi-Rainy-Day-Moewalls-Com-001.jpg" alt="Rainy garden house">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Hornet-Green-Cave-Hollow-Knight-Silksong-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Hornet-Green-Cave-Hollow-Knight-Silksong-Moewalls-Com-001.jpg" alt="Hornet hollow knight">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Houses.mp4" type="button">
-                    <img src="static/image/Houses-001.jpg" alt="Houses">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Jake-Listening-To-Music-In-The-Rain-Adventure-Time-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Jake-Listening-To-Music-In-The-Rain-Adventure-Time-Moewalls-Com-001.jpg" alt="Jake adventure time">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Boy-Camping-Car-Raining-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Lofi-Boy-Camping-Car-Raining-Moewalls-Com-001.jpg" alt="Lofi boy camping">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Girl-Autumn-Afternoon-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Lofi-Girl-Autumn-Afternoon-Moewalls-Com-001.jpg" alt="Lofi girl autumn">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-House-Cloudy-Day-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Lofi-House-Cloudy-Day-Moewalls-Com-001.jpg" alt="Cloudy lofi house">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Lofi-Van-Life-Moewalls-Com2.mp4" type="button">
-                    <img src="static/image/Lofi-Van-Life-Moewalls-Com2-001.jpg" alt="Van life lofi">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Lonely-Lofi-Boy-Aesthetic-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Lonely-Lofi-Boy-Aesthetic-Moewalls-Com-001.jpg" alt="Lonely lofi boy">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Night-Drive-Galaxy-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Night-Drive-Galaxy-Moewalls-Com-001.jpg" alt="Night drive galaxy">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Pirate-Ship-Golden-Field-Minecraft-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Pirate-Ship-Golden-Field-Minecraft-Moewalls-Com-001.jpg" alt="Minecraft pirate ship">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Pixel-Girl-Smoking-Night-City-Cyberpunk-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Pixel-Girl-Smoking-Night-City-Cyberpunk-Moewalls-Com-001.jpg" alt="Pixel girl cyberpunk">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Star-Wars-Ghibli-Style-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Star-Wars-Ghibli-Style-Moewalls-Com-001.jpg" alt="Star wars ghibli style">
-                </button>
-                <button class="wallpaper-thumb" data-video-src="static/video/Winter-Bus-Pixel-Moewalls-Com.mp4" type="button">
-                    <img src="static/image/Winter-Bus-Pixel-Moewalls-Com-001.jpg" alt="Winter pixel bus">
-                </button>
-            </div>
-        </section>
+    <main class="hero">
+        <p class="hero-greeting" id="greeting">Good evening</p>
+        <h1 class="hero-clock" id="clock" aria-live="off">00:00</h1>
+        <p class="hero-date" id="date"></p>
+        <div class="hero-focus" id="hero-focus" hidden>
+            <span class="hero-focus-label" id="hero-focus-label">Focus</span>
+            <span class="hero-focus-time" id="hero-focus-time">25:00</span>
+        </div>
+        <p class="hero-hint ui" id="hero-hint">Press <kbd>Space</kbd> to play, <kbd>?</kbd> for shortcuts</p>
     </main>
 
-    <div class="dock">
-        <div class="dock-group">
-            <button class="dock-button" data-target="music-panel" title="Playlists">
-                <i class="fas fa-music"></i>
-            </button>
-            <button class="dock-button" data-target="ambience-panel" title="Ambience">
-                <i class="fas fa-cloud-rain"></i>
-            </button>
-            <button class="dock-button" data-target="notes-panel" title="Notes">
-                <i class="far fa-sticky-note"></i>
-            </button>
-            <button class="dock-button" data-target="wallpaper-panel" title="Wallpapers">
-                <i class="fas fa-image"></i>
-            </button>
-            <button class="dock-button" data-target="timer-panel" title="Timer">
-                <i class="fas fa-clock"></i>
-            </button>
-        </div>
-        <div class="dock-divider"></div>
-        <div class="dock-group">
-            <button class="dock-button" id="prev-button" title="Previous">
-                <i class="fas fa-backward"></i>
-            </button>
-            <button class="dock-button dock-play" id="play-pause-button" title="Play or pause">
-                <i class="fas fa-play"></i>
-            </button>
-            <button class="dock-button" id="next-button" title="Next">
-                <i class="fas fa-forward"></i>
-            </button>
-            <button class="dock-button" data-target="volume-panel" title="Volumes">
-                <i class="fas fa-sliders-h"></i>
-            </button>
-        </div>
-    </div>
+    <!-- Sheets -->
+    <section class="sheet" id="sheet-music" data-sheet aria-label="Music" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Music</h2>
+                <p>Only tracks the embedded player can stream are queued.</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <article class="now-card">
+                <div class="now-art" id="now-art"><svg><use href="#i-music"/></svg></div>
+                <div class="now-meta">
+                    <span class="eyebrow" id="now-playlist">Chill Lofi</span>
+                    <strong id="now-title">Press play to start</strong>
+                    <span id="now-artist">SoundCloud</span>
+                </div>
+                <a class="icon-button" id="now-link" href="https://soundcloud.com" target="_blank" rel="noopener" title="Open on SoundCloud" aria-label="Open on SoundCloud"><svg><use href="#i-external"/></svg></a>
+                <div class="now-progress">
+                    <span id="now-elapsed">0:00</span>
+                    <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+                    <span id="now-duration">0:00</span>
+                </div>
+                <div class="now-controls">
+                    <button class="icon-button toggle" type="button" id="shuffle-button" aria-pressed="false" title="Shuffle (S)" aria-label="Shuffle"><svg><use href="#i-shuffle"/></svg></button>
+                    <button class="icon-button" type="button" data-action="prev" aria-label="Previous"><svg><use href="#i-prev"/></svg></button>
+                    <button class="play-button" type="button" data-action="toggle" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+                    <button class="icon-button" type="button" data-action="next" aria-label="Next"><svg><use href="#i-next"/></svg></button>
+                    <div class="volume-inline">
+                        <svg><use href="#i-volume"/></svg>
+                        <input type="range" min="0" max="100" value="70" data-volume="music" aria-label="Music volume">
+                    </div>
+                </div>
+                <p class="now-note" id="queue-note"></p>
+            </article>
 
-    <audio id="ambient-rain" src="https://www.soundjay.com/nature/rain-01.mp3" preload="none" loop></audio>
-    <audio id="ambient-fireplace" src="static\son\Feu.mp3" preload="none" loop></audio>
-    <audio id="ambient-wind" src="static\son\jungle.mp3" preload="none" loop></audio>
-    <audio id="ambient-waves" src="static\son\vagues.mp3" preload="none" loop></audio>
-    <audio id="ambient-cafe" src="static\son\urban.mp3" preload="none" loop></audio>
+            <h3 class="section-title">Stations</h3>
+            <div class="station-list" id="station-list"></div>
+
+            <form class="inline-form" id="custom-playlist-form">
+                <input type="url" id="custom-playlist-url" placeholder="Paste a SoundCloud playlist link" aria-label="SoundCloud playlist link">
+                <button type="submit" class="pill-button">Load</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="sheet" id="sheet-ambience" data-sheet aria-label="Ambience" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Ambience</h2>
+                <p>Layer sounds. Each one loops seamlessly.</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <div class="chip-row" id="mix-presets"></div>
+            <div class="ambient-grid" id="ambient-grid"></div>
+            <div class="sheet-foot">
+                <button type="button" class="ghost-button" id="ambient-stop">Stop all</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="sheet" id="sheet-focus" data-sheet aria-label="Focus" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Focus</h2>
+                <p><span id="focus-count">0</span> sessions today</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <div class="segmented" id="focus-modes" role="tablist">
+                <button type="button" data-mode="focus" class="is-active">Focus</button>
+                <button type="button" data-mode="short">Short break</button>
+                <button type="button" data-mode="long">Long break</button>
+            </div>
+            <div class="ring-wrap">
+                <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
+                    <circle class="ring-track" cx="60" cy="60" r="54"/>
+                    <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="54"/>
+                </svg>
+                <div class="ring-center">
+                    <span class="ring-time" id="focus-time">25:00</span>
+                    <span class="ring-label" id="focus-state">Ready</span>
+                </div>
+            </div>
+            <div class="focus-actions">
+                <button type="button" class="icon-button" id="focus-reset" aria-label="Reset" title="Reset"><svg><use href="#i-reset"/></svg></button>
+                <button type="button" class="play-button" id="focus-start" aria-label="Start"><svg><use href="#i-play"/></svg></button>
+                <button type="button" class="icon-button" id="focus-skip" aria-label="Skip" title="Skip to next phase"><svg><use href="#i-next"/></svg></button>
+            </div>
+            <h3 class="section-title">Durations, in minutes</h3>
+            <div class="settings-grid">
+                <label><span>Focus</span><input type="number" min="1" max="180" id="dur-focus" value="25"></label>
+                <label><span>Short break</span><input type="number" min="1" max="60" id="dur-short" value="5"></label>
+                <label><span>Long break</span><input type="number" min="1" max="90" id="dur-long" value="15"></label>
+            </div>
+            <label class="switch-row"><input type="checkbox" id="focus-auto" checked><span>Chain focus and breaks automatically</span></label>
+            <label class="switch-row"><input type="checkbox" id="focus-notify"><span>Desktop notification when a phase ends</span></label>
+        </div>
+    </section>
+
+    <section class="sheet sheet--wide" id="sheet-notes" data-sheet aria-label="Notes" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Notes</h2>
+                <p>Saved on this device only.</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <div class="segmented" id="notes-tabs" role="tablist">
+                <button type="button" data-tab="tasks" class="is-active">Tasks</button>
+                <button type="button" data-tab="board">Board</button>
+            </div>
+            <div class="notes-view" data-view="tasks">
+                <form class="inline-form" id="task-form">
+                    <input type="text" id="task-input" placeholder="What are you working on?" maxlength="160" aria-label="New task">
+                    <button type="submit" class="pill-button" aria-label="Add task"><svg><use href="#i-plus"/></svg></button>
+                </form>
+                <ul class="task-list" id="task-list"></ul>
+                <div class="sheet-foot">
+                    <span class="muted" id="task-count"></span>
+                    <button type="button" class="ghost-button" id="task-clear">Clear done</button>
+                </div>
+            </div>
+            <div class="notes-view" data-view="board" hidden>
+                <div class="sheet-foot sheet-foot--top">
+                    <button type="button" class="pill-button" id="add-note"><svg><use href="#i-plus"/></svg>New note</button>
+                    <button type="button" class="ghost-button" id="clear-notes">Clear board</button>
+                </div>
+                <div id="notes-board" class="notes-board"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sheet sheet--wide" id="sheet-scenes" data-sheet aria-label="Scenes" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Scenes</h2>
+                <p>The interface picks its accent colour from the scene.</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <div class="scene-options">
+                <label class="switch-row"><input type="checkbox" id="motion-toggle"><span>Animated wallpaper</span></label>
+                <label class="range-row">Dim <input type="range" id="dim-range" min="0" max="70" value="25" aria-label="Dim wallpaper"></label>
+            </div>
+            <div class="scene-grid" id="scene-grid"></div>
+        </div>
+    </section>
+
+    <section class="sheet" id="sheet-shortcuts" data-sheet aria-label="Shortcuts" tabindex="-1">
+        <header class="sheet-head">
+            <div>
+                <h2>Shortcuts</h2>
+                <p>Work everywhere except while typing.</p>
+            </div>
+            <button class="icon-button" type="button" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+        </header>
+        <div class="sheet-body">
+            <dl class="shortcut-list">
+                <div><dt><kbd>Space</kbd></dt><dd>Play / pause music</dd></div>
+                <div><dt><kbd>N</kbd> <kbd>P</kbd></dt><dd>Next / previous track</dd></div>
+                <div><dt><kbd>S</kbd></dt><dd>Shuffle</dd></div>
+                <div><dt><kbd>↑</kbd> <kbd>↓</kbd></dt><dd>Music volume</dd></div>
+                <div><dt><kbd>M</kbd></dt><dd>Mute everything</dd></div>
+                <div><dt><kbd>1</kbd>–<kbd>5</kbd></dt><dd>Music, Ambience, Focus, Notes, Scenes</dd></div>
+                <div><dt><kbd>F</kbd></dt><dd>Start / pause focus timer</dd></div>
+                <div><dt><kbd>Z</kbd></dt><dd>Zen mode</dd></div>
+                <div><dt><kbd>[</kbd> <kbd>]</kbd></dt><dd>Previous / next scene</dd></div>
+                <div><dt><kbd>Esc</kbd></dt><dd>Close panel, leave zen</dd></div>
+            </dl>
+        </div>
+    </section>
+
+    <!-- Dock -->
+    <nav class="dock ui" aria-label="Controls">
+        <button class="dock-now" type="button" data-open="music" aria-label="Open music">
+            <span class="dock-art" id="dock-art"><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span></span>
+            <span class="dock-meta">
+                <strong id="dock-title">Lofi Studio</strong>
+                <span id="dock-sub">Press play</span>
+            </span>
+            <span class="dock-progress" aria-hidden="true"><span id="dock-progress-bar"></span></span>
+        </button>
+        <div class="dock-transport">
+            <button class="icon-button" type="button" data-action="prev" aria-label="Previous" title="Previous (P)"><svg><use href="#i-prev"/></svg></button>
+            <button class="play-button" type="button" data-action="toggle" aria-label="Play" title="Play / pause (Space)"><svg><use href="#i-play"/></svg></button>
+            <button class="icon-button" type="button" data-action="next" aria-label="Next" title="Next (N)"><svg><use href="#i-next"/></svg></button>
+        </div>
+        <div class="dock-tools">
+            <button class="dock-tool" type="button" data-open="music" title="Music (1)" aria-label="Music"><svg><use href="#i-music"/></svg></button>
+            <button class="dock-tool" type="button" data-open="ambience" title="Ambience (2)" aria-label="Ambience"><svg><use href="#i-ambience"/></svg><span class="dock-badge" id="ambient-badge" hidden></span></button>
+            <button class="dock-tool" type="button" data-open="focus" title="Focus (3)" aria-label="Focus"><svg><use href="#i-timer"/></svg></button>
+            <button class="dock-tool" type="button" data-open="notes" title="Notes (4)" aria-label="Notes"><svg><use href="#i-notes"/></svg></button>
+            <button class="dock-tool" type="button" data-open="scenes" title="Scenes (5)" aria-label="Scenes"><svg><use href="#i-scene"/></svg></button>
+        </div>
+    </nav>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <!-- SoundCloud engine (kept in the DOM, visually hidden) -->
+    <div class="sc-host" aria-hidden="true">
+        <iframe id="sc-player" title="SoundCloud player" allow="autoplay; encrypted-media" tabindex="-1"></iframe>
+    </div>
 
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <script src="static/script.js"></script>

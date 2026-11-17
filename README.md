@@ -1,42 +1,38 @@
 # Lofi Studio
 
-Personal lofi workspace: pick a playlist, mix ambient sounds, take notes, run a focus timer, and swap the video wallpaper.
+Personal lofi workspace: curated SoundCloud stations, an ambient mixer, a focus timer, tasks and sticky notes, over living wallpapers.
 
 Live: https://lofi.samuelvanderhoeven.fr
 
 ## Features
 
-- SoundCloud playlist picker with custom link support
-- Ambient mixer with independent volume sliders
-- Sticky notes board saved in localStorage
-- Focus timer with presets and custom minutes
-- Video wallpaper switcher
-- Centralized volume panel
+- **Music**: six curated stations plus any SoundCloud playlist link. Custom now-playing card with artwork, seek bar, shuffle and volume. Media keys supported where the browser allows it.
+- **Instant start**: the playlist metadata is read before playing and only tracks the embedded player can actually stream are queued (see below).
+- **Ambience**: rain, fireplace, jungle, ocean, city and brown noise, mixed with Web Audio for gapless loops. One-click presets (Rainy night, Seaside, Cabin, City café, Deep focus). The last mix resumes on the first click.
+- **Focus**: Pomodoro timer with focus, short and long breaks, automatic chaining, a chime, optional desktop notification, a daily session counter and the countdown in the tab title.
+- **Notes**: a task list and a draggable sticky-note board, saved in localStorage (older notes are kept).
+- **Scenes**: 19 wallpapers, animated or still, with a dim control. The accent colour is picked from the wallpaper.
+- **Zen mode** (`Z`): only the clock remains, the interface shows up again when the mouse moves.
+- **Keyboard shortcuts**: press `?` in the app.
+- **PWA**: installable, with an offline shell (videos and SoundCloud are never cached by the service worker).
+
+## Why some tracks are skipped
+
+Many lofi tracks on SoundCloud are `AD_SUPPORTED` and only exist as encrypted HLS streams. The embedded widget cannot play them, so it used to skip them one by one, which could take 30 to 40 seconds before any music started. The app now filters them out from the playlist metadata, drives the widget with `skip(index)`, and drops any track that stays silent for 9 seconds.
+
+Playable tracks per station, as tested in November 2026: Chill Lofi 286/470, Lofi Hip Hop 220/400, Jazz Hop Radio 180/295, Jazz Hop Beats 40/61, Chill Selection 41/336, Sleep Lofi 35/235.
 
 ## Run locally
 
-Option 1: open `index.html` directly.
-
-Option 2: serve it for a cleaner SoundCloud experience:
-
 ```bash
-python -m http.server 8000
+python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000
+Then open http://localhost:8000 (the service worker only registers over HTTPS).
 
 ## Customize
 
-- Playlists: edit the options in `index.html` or paste a SoundCloud playlist link in the UI.
-- Ambient sounds: update the `audio` tags in `index.html` and keep the `data-volume-for` values in sync.
-- Wallpapers: update the buttons in `index.html` and the files in `static/video` and `static/image`.
-- Styling: tweak the CSS variables in `static/style.css`.
-
-## Tech
-
-HTML, CSS, JavaScript, SoundCloud Widget API, Font Awesome, Google Fonts.
-
-## Credits
-
-- SoundCloud player and playlists.
-- Ambient samples from https://www.soundjay.com
+- Stations: edit the `STATIONS` array in `static/script.js`.
+- Wallpapers: add `static/video/<name>.mp4`, `static/image/<name>-001.jpg`, `static/thumb/<name>.jpg` and an entry in `SCENES`.
+- Ambient sounds: add an mp3 in `static/son/` and an entry in `AMBIENTS`.
+- After changing the shell files, bump `VERSION` in `sw.js`.
